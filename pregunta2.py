@@ -1,19 +1,14 @@
+import random
+import unittest
+
+class Nodo(object):
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
 class Pokemon:
-    def __init__(self, nombre, tipo):
+    def __init__(self, nombre, tipo, nivel):
         self.nombre = nombre
         self.tipo = tipo
-        print(f"Se ha creado el Pokemon {self.nombre} de tipo {self.tipo}.")
-
-    def clasificacion(self):
-        print("Clasificación del Pokemon:")
-        print("- PS")
-        print("- Ataque")
-        print("- Defensa")
-        print("- Ataque Especial")
-        print("- Defensa Especial")
-        print("- Velocidad")
-
-if __name__ == "__main__":
-
-    pokemon1 = Pokemon("Pikachu", "Eléctrico")
-    pokemon1.clasificacion()
+        self.nivel = nivel
+        print(f"Se ha creado con éxito el Pokemon {self.nombre} de tipo {self.tipo} y nivel {self.nivel}.")
