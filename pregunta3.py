@@ -85,3 +85,5 @@ class ListaPokemon:
         while current is not None:
             print(current.data)
             current = current.next
+
+class 
