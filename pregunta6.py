@@ -7,7 +7,7 @@ def es_seguro(tablero, fila, columna):
 
     return True
 
-def n_reinas(tablero, fila, n):
+def n_pokebolas(tablero, fila, n):
     if fila == n:
         return True
 
@@ -15,7 +15,7 @@ def n_reinas(tablero, fila, n):
         if es_seguro(tablero, fila, columna):
             tablero[fila] = columna
 
-            if n_reinas(tablero, fila + 1, n):
+            if n_pokebolas(tablero, fila + 1, n):
                 return True
 
             # Backtrack
@@ -23,10 +23,10 @@ def n_reinas(tablero, fila, n):
 
     return False
 
-def resuelve_n_reinas():
+def resuelve_n_pokebolas():
     n = int(input("Ingrese el número de reinas: "))
     tablero = [-1] * n
-    if n_reinas(tablero, 0, n) is False:
+    if n_pokebolas(tablero, 0, n) is False:
         print("No hay solución")
         return False
 
@@ -35,4 +35,4 @@ def resuelve_n_reinas():
 
 if __name__ == '__main__':
     # Probamos la función
-    resuelve_n_reinas()
+    resuelve_n_pokebolas()
