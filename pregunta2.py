@@ -12,3 +12,6 @@ class Pokemon:
         self.tipo = tipo
         self.nivel = nivel
         print(f"Se ha creado con éxito el Pokemon {self.nombre} de tipo {self.tipo} y nivel {self.nivel}.")
+
+    def __str__(self):
+        return "Lo que quiero mostrar"
