@@ -60,7 +60,7 @@ def espacio_ocupado(frecuencias, mensaje_codificado):
 if __name__ == "__main__":
     
     frecuencias = {'T': 0.15, 'O': 0.15, 'A': 0.12, 'E': 0.10, 'H': 0.09, 'S':0.07, 'P': 0.07, 'M': 0.07, 'N': 0.06, 'C': 0.06, 'D': 0.05, 'Z': 0.04, 'K': 0.03, ',': 0.03}
-    mensaje = "SOMOS,TODAS,DZKEHPNC"
+    mensaje = "HAZTE,CON,TODOS,POKEMON"
     arbol_huffman = NodoHuffman.construir_arbol_huffman(frecuencias)
     mensaje_codificado = arbol_huffman.codificar_mensaje(mensaje)
     mensaje_decodificado = arbol_huffman.decodificar_mensaje(mensaje_codificado)
