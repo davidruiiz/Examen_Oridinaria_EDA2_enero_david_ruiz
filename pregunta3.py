@@ -13,7 +13,7 @@ class Pokemon:
         self.nivel = nivel
     
     def __str__(self):
-        return f'Lo que quiero mostrar'
+        return 'Lo que quiero mostrar'
 
 
     def calificacion(self):
