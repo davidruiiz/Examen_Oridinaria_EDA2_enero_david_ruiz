@@ -1,38 +1,44 @@
-def es_seguro(tablero, fila, columna):
-    # Verifica si la posición está en la misma fila o columna
-    for i in range(fila):
-        if tablero[i] == columna or \
-           abs(tablero[i] - columna) == abs(i - fila):
-            return False
+class TableroPokebolas:
+    def __init__(self, n):
+        self.n = n
+        self.tablero = [-1] * n
 
-    return True
+    def es_seguro(self, fila, columna):
+        # Verifica si la posición es segura (no hay conflictos)
+        for i in range(fila):
+            # Verifica si hay una pokebola en la misma columna o en la misma diagonal
+            if self.tablero[i] == columna or abs(self.tablero[i] - columna) == abs(i - fila):
+                return False
 
-def n_pokebolas(tablero, fila, n):
-    if fila == n:
         return True
 
-    for columna in range(n):
-        if es_seguro(tablero, fila, columna):
-            tablero[fila] = columna
+    def coloca_pokebolas(self, fila):
+        if fila == self.n:
+            return True
 
-            if n_pokebolas(tablero, fila + 1, n):
-                return True
+        for columna in range(self.n):
+            if self.es_seguro(fila, columna):
+                self.tablero[fila] = columna
 
-            # Backtrack
-            tablero[fila] = -1
+                if self.coloca_pokebolas(fila + 1):
+                    return True
 
-    return False
+                # Retroceder (backtrack)
+                self.tablero[fila] = -1
 
-def resuelve_n_pokebolas():
-    n = int(input("Ingrese el número de reinas: "))
-    tablero = [-1] * n
-    if n_pokebolas(tablero, 0, n) is False:
-        print("No hay solución")
         return False
 
-    print(tablero)
-    return True
+    def resuelve_puzzle_pokebolas(self):
+        if self.coloca_pokebolas(0) is False:
+            print("No hay solución")
+            return False
+
+        print(self.tablero)
+        return True
+
 
 if __name__ == '__main__':
-    # Probamos la función
-    resuelve_n_pokebolas()
+    
+    n = int(input("Ingrese el número de pokebolas: "))
+    tablero_pokebolas = TableroPokebolas(n)
+    tablero_pokebolas.resuelve_puzzle_pokebolas()
