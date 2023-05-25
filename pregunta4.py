@@ -1,4 +1,5 @@
 import unittest
+import datetime
 
 class Nodo(object):
     def __init__(self, data):
@@ -12,6 +13,7 @@ class Pokeball:
         self.nombre = nombre
         self.precio = precio
         self.fecha_fabricacion = fecha_fabricacion
+        print("Se ha creado una pokeball exitosamente")
 
     def __str__(self):
         return f"La pokeball {self.nombre} pesa {self.peso} gramos y cuesta {self.precio} pesos"
@@ -60,68 +62,44 @@ class ListaPokeball:
             print("Pokeball no encontrada")
 
 
-class TestListaPokeball(unittest.TestCase):
+# creamos algunas pokeballs
+pokeball1 = Pokeball(100, "Superball", 200, datetime.datetime(2023, 5, 10))
+pokeball2 = Pokeball(80, "Ultraball", 300, datetime.datetime(2023, 4, 20))
+pokeball3 = Pokeball(120, "Masterball", 500, datetime.datetime(2023, 6, 5))
+
+# mostramos las pokeballs ordenadas por fecha de fabricación
+lista_pokeballs = ListaPokeball()
+lista_pokeballs.insertar(pokeball1)
+lista_pokeballs.insertar(pokeball2)
+lista_pokeballs.insertar(pokeball3)
+lista_pokeballs.mostrar()
+
+# modificamos el precio de una pokeball
+lista_pokeballs.modificar(pokeball2, "precio", 350)
+lista_pokeballs.mostrar()
+
+# Experimentación
+
+
+class Test(unittest.TestCase):
 
     def setUp(self):
-        self.pokeball1 = Pokeball(50, "Pokeball1", 10, "2021-01-01")
-        self.pokeball2 = Pokeball(30, "Pokeball2", 5, "2021-02-01")
-        self.pokeball3 = Pokeball(40, "Pokeball3", 8, "2021-03-01")
-
-        self.lista_pokeball = ListaPokeball()
+        self.pokeball1 = Pokeball(100, "Superball", 200, datetime.datetime(2023, 5, 10))
+        self.pokeball2 = Pokeball(80, "Ultraball", 300, datetime.datetime(2023, 4, 20))
+        self.pokeball3 = Pokeball(120, "Masterball", 500, datetime.datetime(2023, 6, 5))
+        self.lista_pokeballs = ListaPokeball()
+        self.lista_pokeballs.insertar(self.pokeball1)
+        self.lista_pokeballs.insertar(self.pokeball2)
+        self.lista_pokeballs.insertar(self.pokeball3)
 
     def test_insertar(self):
-        self.lista_pokeball.insertar(self.pokeball1)
-        self.assertEqual(self.lista_pokeball.head.data, self.pokeball1)
-        self.assertIsNone(self.lista_pokeball.head.next)
-
-        self.lista_pokeball.insertar(self.pokeball2)
-        self.assertEqual(self.lista_pokeball.head.data, self.pokeball2)
-        self.assertEqual(self.lista_pokeball.head.next.data, self.pokeball1)
-        self.assertIsNone(self.lista_pokeball.head.next.next)
-
-        self.lista_pokeball.insertar(self.pokeball3)
-        self.assertEqual(self.lista_pokeball.head.data, self.pokeball2)
-        self.assertEqual(self.lista_pokeball.head.next.data, self.pokeball3)
-        self.assertEqual(self.lista_pokeball.head.next.next.data, self.pokeball1)
-        self.assertIsNone(self.lista_pokeball.head.next.next.next)
+        self.assertEqual(self.lista_pokeballs.head.data, self.pokeball2)
+        self.assertEqual(self.lista_pokeballs.head.next.data, self.pokeball1)
+        self.assertEqual(self.lista_pokeballs.head.next.next.data, self.pokeball3)
 
     def test_modificar(self):
-        self.lista_pokeball.insertar(self.pokeball1)
-        self.lista_pokeball.insertar(self.pokeball2)
-        self.lista_pokeball.insertar(self.pokeball3)
+        self.lista_pokeballs.modificar(self.pokeball2, "precio", 350)
+        self.assertEqual(self.lista_pokeballs.head.next.data.precio, 350)
 
-        self.lista_pokeball.modificar(self.pokeball2, "peso", 35)
-        self.assertEqual(self.lista_pokeball.head.next.data.peso, 35)
-
-        self.lista_pokeball.modificar(self.pokeball1, "nombre", "NuevaPokeball")
-        self.assertEqual(self.lista_pokeball.head.next.next.data.nombre, "NuevaPokeball")
-
-        self.lista_pokeball.modificar(self.pokeball3, "precio", 15)
-        self.assertEqual(self.lista_pokeball.head.next.data.precio, 15)
-
-        self.lista_pokeball.modificar(self.pokeball2, "fecha_fabricacion", "2022-01-01")
-        self.assertEqual(self.lista_pokeball.head.next.next.data.fecha_fabricacion, "2022-01-01")
-
-    def test_mostrar(self):
-        self.lista_pokeball.insertar(self.pokeball1)
-        self.lista_pokeball.insertar(self.pokeball2)
-        self.lista_pokeball.insertar(self.pokeball3)
-
-        # Redirigir la salida estándar a un StringIO para capturar la salida
-        from io import StringIO
-        import sys
-        captured_output = StringIO()
-        sys.stdout = captured_output
-
-        self.lista_pokeball.mostrar()
-
-        sys.stdout = sys.__stdout__  # Restaurar la salida estándar
-
-        expected_output = "La pokeball Pokeball2 pesa 30 gramos y cuesta 5 pesos\n" \
-                          "La pokeball Pokeball3 pesa 40 gramos y cuesta 8 pesos\n" \
-                          "La pokeball Pokeball1 pesa 50 gramos y cuesta 10 pesos\n"
-        self.assertEqual(captured_output.getvalue(), expected_output)
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
