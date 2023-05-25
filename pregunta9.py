@@ -40,7 +40,7 @@ class Grafo:
         return distancias
 
 if __name__ == '__main__':
-
+    
     # Crear el grafo y agregar las tareas con sus respectivas duraciones
     grafo = Grafo()
     grafo.agregar_tarea('A', 20)
