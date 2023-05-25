@@ -66,6 +66,31 @@ class Pokemon:
 
         return f"La calificación de {self.nombre} es {self.tipo}, por lo que sus PS son {PS}, su Ataque es {Ataque}, su Defensa es {Defensa}, su Ataque Especial es {Ataque_Especial}, su Defensa Especial es {Defensa_Especial} y su Velocidad es {Velocidad}"
 
+class ListaPokemon:
+    def __init__(self):
+        self.head = None
+    
+    def insertar(self, pokemon):
+        new_node = Nodo(pokemon)
+        if self.head is None:
+            self.head = new_node
+        elif self.head.data.nivel < pokemon.nivel:
+            new_node.next = self.head
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next is not None and current.next.data.nivel > pokemon.nivel:
+                current = current.next
+            new_node.next = current.next
+            current.next = new_node
+
+    def mostrar(self):
+        current = self.head
+        while current is not None:
+            print(current.data)
+            current = current.next
+
+            
 class TestPokemon(unittest.TestCase):
 
     def setUp(self):
