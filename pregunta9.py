@@ -81,3 +81,7 @@ if __name__ == '__main__':
     print("Camino más corto para completar las tareas:")
     for tarea, duracion in camino_mas_corto:
         print(f"Tarea: {tarea}, Duración: {duracion} minutos")
+
+    # Obtener la duración mínima de la misión
+    duracion_minima = max(camino_mas_corto, key=lambda x: x[1])[1]
+    print(f"Duración mínima de la misión: {duracion_minima} minutos")
