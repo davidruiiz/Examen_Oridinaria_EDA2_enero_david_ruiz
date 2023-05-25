@@ -1,4 +1,3 @@
-import random
 import unittest
 
 class Nodo(object):
@@ -66,3 +65,35 @@ class Pokemon:
             Velocidad = 95
 
         return f"La calificación de {self.nombre} es {self.tipo}, por lo que sus PS son {PS}, su Ataque es {Ataque}, su Defensa es {Defensa}, su Ataque Especial es {Ataque_Especial}, su Defensa Especial es {Defensa_Especial} y su Velocidad es {Velocidad}"
+
+class TestPokemon(unittest.TestCase):
+
+    def setUp(self):
+        self.pokemon1 = Pokemon("Charizard", "Fuego", 60)
+        self.pokemon2 = Pokemon("Blastoise", "Agua", 70)
+        self.pokemon3 = Pokemon("Venusaur", "Planta", 65)
+        self.pokemon4 = Pokemon("Pidgeot", "Volador", 50)
+        self.pokemon5 = Pokemon("Pikachu", "Eléctrico", 55)
+
+    def test_calificacion_fuego(self):
+        expected_output = "La calificación de Charizard es Fuego, por lo que sus PS son 60, su Ataque es 65, su Defensa es 55, su Ataque Especial es 70, su Defensa Especial es 60 y su Velocidad es 80"
+        self.assertEqual(self.pokemon1.calificacion("Fuego"), expected_output)
+
+    def test_calificacion_agua(self):
+        expected_output = "La calificación de Blastoise es Agua, por lo que sus PS son 70, su Ataque es 60, su Defensa es 75, su Ataque Especial es 55, su Defensa Especial es 70 y su Velocidad es 50"
+        self.assertEqual(self.pokemon2.calificacion("Agua"), expected_output)
+
+    def test_calificacion_planta(self):
+        expected_output = "La calificación de Venusaur es Planta, por lo que sus PS son 65, su Ataque es 55, su Defensa es 60, su Ataque Especial es 70, su Defensa Especial es 65 y su Velocidad es 45"
+        self.assertEqual(self.pokemon3.calificacion("Planta"), expected_output)
+
+    def test_calificacion_volador(self):
+        expected_output = "La calificación de Pidgeot es Volador, por lo que sus PS son 50, su Ataque es 45, su Defensa es 50, su Ataque Especial es 40, su Defensa Especial es 40 y su Velocidad es 70"
+        self.assertEqual(self.pokemon4.calificacion("Volador"), expected_output)
+
+    def test_calificacion_electrico(self):
+        expected_output = "La calificación de Pikachu es Eléctrico, por lo que sus PS son 55, su Ataque es 70, su Defensa es 60, su Ataque Especial es 65, su Defensa Especial es 65 y su Velocidad es 95"
+        self.assertEqual(self.pokemon5.calificacion("Eléctrico"), expected_output)
+
+if __name__ == "__main__":
+    unittest.main()
