@@ -1,4 +1,3 @@
-import random
 import unittest
 
 class Nodo(object):
@@ -13,7 +12,7 @@ class Pokemon:
         self.nivel = nivel
     
     def __str__(self):
-        return 'Lo que quiero mostrar'
+        return 'Nombre: ' + self.nombre + ' Tipo: ' + self.tipo + ' Nivel: ' + str(self.nivel)
 
 
     def calificacion(self):
@@ -86,3 +85,52 @@ class ListaPokemon:
             print(current.data)
             current = current.next
 
+
+class PokemonTests(unittest.TestCase):
+
+    def setUp(self):
+        self.pokemon1 = Pokemon("Pikachu", "Electrico", 30)
+        self.pokemon2 = Pokemon("Charizard", "Fuego", 50)
+        self.pokemon3 = Pokemon("Blastoise", "Agua", 40)
+
+        self.lista_pokemon = ListaPokemon()
+
+    def test_insertar(self):
+        self.lista_pokemon.insertar(self.pokemon1)
+        self.assertEqual(self.lista_pokemon.head.data, self.pokemon1)
+        self.assertIsNone(self.lista_pokemon.head.next)
+
+        self.lista_pokemon.insertar(self.pokemon2)
+        self.assertEqual(self.lista_pokemon.head.data, self.pokemon2)
+        self.assertEqual(self.lista_pokemon.head.next.data, self.pokemon1)
+        self.assertIsNone(self.lista_pokemon.head.next.next)
+
+        self.lista_pokemon.insertar(self.pokemon3)
+        self.assertEqual(self.lista_pokemon.head.data, self.pokemon2)
+        self.assertEqual(self.lista_pokemon.head.next.data, self.pokemon3)
+        self.assertEqual(self.lista_pokemon.head.next.next.data, self.pokemon1)
+        self.assertIsNone(self.lista_pokemon.head.next.next.next)
+
+    def test_mostrar(self):
+        self.lista_pokemon.insertar(self.pokemon1)
+        self.lista_pokemon.insertar(self.pokemon2)
+        self.lista_pokemon.insertar(self.pokemon3)
+
+        # Redirigir la salida estándar a un StringIO para capturar la salida
+        from io import StringIO
+        import sys
+        captured_output = StringIO()
+        sys.stdout = captured_output
+
+        self.lista_pokemon.mostrar()
+
+        sys.stdout = sys.__stdout__  # Restaurar la salida estándar
+
+        expected_output = "Nombre: Charizard Tipo: Fuego Nivel: 50\n" \
+                          "Nombre: Blastoise Tipo: Agua Nivel: 40\n" \
+                          "Nombre: Pikachu Tipo: Electrico Nivel: 30\n"
+        self.assertEqual(captured_output.getvalue(), expected_output)
+
+
+if __name__ == '__main__':
+    unittest.main()
