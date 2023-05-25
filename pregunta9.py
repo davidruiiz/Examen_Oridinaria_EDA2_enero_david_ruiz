@@ -29,6 +29,9 @@ class Grafo:
             tarea_actual = self.obtener_minimo(distancias, visitados)
             visitados[tarea_actual] = True
 
+            if tarea_actual is None:
+                break
+
             for tarea_siguiente, duracion_arista in self.vertices[tarea_actual]:
                 distancia = distancias[tarea_actual] + duracion_arista
                 if not visitados[tarea_siguiente] and distancia < distancias[tarea_siguiente]:
@@ -36,9 +39,8 @@ class Grafo:
 
         return distancias
 
-
 if __name__ == '__main__':
-    
+
     # Crear el grafo y agregar las tareas con sus respectivas duraciones
     grafo = Grafo()
     grafo.agregar_tarea('A', 20)
