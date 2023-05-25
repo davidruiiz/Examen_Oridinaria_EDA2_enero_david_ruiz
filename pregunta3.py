@@ -133,4 +133,17 @@ class PokemonTests(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    
+    # Crear una lista de objetos Pokemon
+    lista_pokemon = [
+        Pokemon("Pikachu", "Electrico", 30),
+        Pokemon("Charizard", "Fuego", 50),
+        Pokemon("Blastoise", "Agua", 40),
+        Pokemon("Venusaur", "Planta", 45)
+    ]
+
+    # Recorrer la lista y mostrar la información de cada objeto Pokemon
+    for pokemon in lista_pokemon:
+        print(pokemon)
+
     unittest.main()
