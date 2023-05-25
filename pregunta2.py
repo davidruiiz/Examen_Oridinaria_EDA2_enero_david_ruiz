@@ -15,3 +15,6 @@ class Pokemon:
 
     def __str__(self):
         return "Lo que quiero mostrar"
+    
+    def __repr__(self):
+        return f"Pokemon: ({self.name},  Tipo: {self.tipo})"
