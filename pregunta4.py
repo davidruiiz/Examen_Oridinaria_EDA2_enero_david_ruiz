@@ -100,7 +100,7 @@ class TestListaPokeball(unittest.TestCase):
         self.assertEqual(self.lista_pokeball.head.next.data.precio, 15)
 
         self.lista_pokeball.modificar(self.pokeball2, "fecha_fabricacion", "2022-01-01")
-        self.assertEqual(self.lista_pokeball.head.next.data.fecha_fabricacion, "2022-01-01")
+        self.assertEqual(self.lista_pokeball.head.next.next.data.fecha_fabricacion, "2022-01-01")
 
     def test_mostrar(self):
         self.lista_pokeball.insertar(self.pokeball1)

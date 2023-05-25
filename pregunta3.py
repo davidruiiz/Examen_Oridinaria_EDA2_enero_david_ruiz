@@ -86,4 +86,3 @@ class ListaPokemon:
             print(current.data)
             current = current.next
 
-class 
